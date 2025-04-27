@@ -167,7 +167,7 @@ Verify System Clock Synchronization
 [root@satellite ~]# chronyc sources -v
 ```
 
-Open the ports for clients on Satellite Server
+Open the firewall ports for clients on Satellite Server
 ```
 [root@satellite ~]# firewall-cmd \
 --add-port="8000/tcp" \
@@ -185,7 +185,7 @@ Allow access to services on Satellite Server
 --add-service=puppetmaster
 ```
 
-Make the changes persistent
+Make the changes persistent in firewall
 ```
 [root@satellite ~]# firewall-cmd --runtime-to-permanent
 ```
@@ -201,7 +201,7 @@ Verify DNS resolution
 [root@satellite ~]# ping -c1 `hostname -f`
 ```
 
-Registering the host to Red Hat Subscription Management
+Register the host to Red Hat Subscription Management
 ```
 [root@satellite ~]# subscription-manager register
 ```
@@ -278,6 +278,7 @@ Enter Credentials and click Login
 - Password: redhat 
 
 You can now see the dashboard of Red Hat Satellite Server 6.15
+
 ![Dashboard](/images/4-dashboard.png)
 
 ## References
