@@ -97,6 +97,7 @@ The runtime size was measured with Red Hat Enterprise Linux 6, 7, and 8 reposito
 
 > [!WARNING]
 > Red Hat advises against using an existing system because the Satellite installer will affect the configuration of several components.
+
 > Red Hat does not support using the system for anything other than running Satellite Server.
 
 ### Supported Browsers
