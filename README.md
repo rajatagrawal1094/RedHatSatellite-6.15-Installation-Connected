@@ -56,14 +56,15 @@ The following table details storage requirements for specific directories. These
 The runtime size was measured with Red Hat Enterprise Linux 6, 7, and 8 repositories synchronized.
 
 | Directory        | Installation Size | Runtime Size   |
-| :-------------:  | :-------------:   | :-----:        |
+| :-------------   | :-------------:   | :-----:        |
 | /var/log         | 10 MB             | 10 GB          |
 | /var/lib/pgsql   | 100 MB            | 20 GB          |
 | /usr             | 10 GB             | Not Applicable |
 | /opt/puppetlabs  | 500 MB            | Not Applicable |
 | /var/lib/pulp    | 1 MB              | 300 GB         |
 
-For external database servers: /var/lib/pgsql with installation size of 100 MB and runtime size of 20 GB.
+> [!NOTE]
+> For external database servers: /var/lib/pgsql with installation size of 100 MB and runtime size of 20 GB.
 
 ### Storage Guidelines
 
