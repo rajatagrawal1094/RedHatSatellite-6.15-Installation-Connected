@@ -29,6 +29,9 @@
 
 - SELinux must be enabled, either in enforcing or permissive mode.
 
+> [!WARNING] 
+> Installation with disabled SELinux is not supported.
+
 #### Synchronized System Clock
 
 - The system clock on the base operating system where you are installing your Satellite Server must be synchronized across the network. 
@@ -42,6 +45,9 @@
 
 > [!WARNING]
 > You cannot enable FIPS mode after the installation of Satellite.
+
+> [!CAUTION]
+> The FUTURE crypto-policy is not supported for Satellite and Capsule installations.
 
 ### Storage Requirements
 
@@ -68,6 +74,18 @@ For external database servers: /var/lib/pgsql with installation size of 100 MB a
 ### File System Guidelines
 
 - Do not use the GFS2 file system as the input-output latency is too high.
+
+### Log file storage
+
+- Log files are written to /var/log/messages/, /var/log/httpd/, and /var/lib/foreman-proxy/openscap/content/. You can manage the size of these files using logrotate.
+
+### Duplicated packages
+
+- Packages that are duplicated in different repositories are only stored once on the disk. Additional repositories containing duplicate packages require less additional storage.
+
+### Symbolic links
+
+- You cannot use symbolic links for /var/lib/pulp/.
 
 ### Supported Operating Systems
 
