@@ -1,5 +1,7 @@
 # Red Hat Satellite 6.15 Installation in a Connected Network Environment
 
+## Preparing your environment for Installation of Red Hat Satellite 6.15
+
 ### System Requirements for base OS
 
 - x86_64 architecture
@@ -125,3 +127,119 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 | 9090             | TCP                | HTTPS           | Red Hat Satellite       | Capsule API                        | Smart Proxy functionality                                              |
 | 9090             | TCP                | HTTPS           | Client                  | OpenSCAP                           | Configure Client (if the OpenSCAP plugin is installed)                 |
 | 9090             | TCP                | HTTPS           | Discovered Node         | Discovery                          | Host discovery and provisioning (if the discovery plugin is installed) |
+
+### Steps to Install
+
+#### Prerequisites
+
+Create a Virtual Machine and Install latest version of Red Hat Enterprise Linux 8 on it.
+
+I have created a VM with the following configuration:
+- vCPUs - 4
+- RAM - 20 GB
+- Storage - 500 GB
+
+Set hostname
+```
+# hostnamectl set-hostname satellite.example.com
+```
+
+Configure SELinux in Enforcing mode
+```
+# entenforce 1
+```
+
+Check the status of System Clock Synchronization
+```
+# chronyc sources -v
+```
+
+Open the ports for clients on Satellite Server
+```
+# firewall-cmd \
+--add-port="8000/tcp" \
+--add-port="9090/tcp"
+```
+
+Allow access to services on Satellite Server
+```
+# firewall-cmd \
+--add-service=dns \
+--add-service=dhcp \
+--add-service=tftp \
+--add-service=http \
+--add-service=https \
+--add-service=puppetmaster
+```
+
+Make the changes persistent
+```
+# firewall-cmd --runtime-to-permanent
+```
+
+Verify firewall configuration
+```
+# firewall-cmd --list-all
+```
+
+Verify DNS resolution
+```
+# ping -c1 localhost
+# ping -c1 `hostname -f`
+```
+
+Registering the host to Red Hat Subscription Management
+```
+# subscription-manager register
+Username: <user_name>
+Password: <password> 
+```
+
+Disable all repos
+```
+# subscription-manager repos --disable "*"
+```
+
+Enable the required repos
+```
+# subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
+--enable=rhel-8-for-x86_64-appstream-rpms \
+--enable=satellite-6.15-for-rhel-8-x86_64-rpms \
+--enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
+```
+
+Verify that repositories are enabled.
+```
+# sudo subscription-manager repos --list-enabled
+```
+
+Enable the DNF module for satellite
+```
+# dnf module enable satellite:el8
+```
+
+Installing fapolicyd on Satellite Server
+```
+# dnf install fapolicyd
+# systemctl enable --now fapolicyd
+# systemctl status fapolicyd
+```
+
+Update all packages
+```
+# dnf upgrade
+```
+
+Install Satellite Server packages
+```
+# dnf install satellite
+```
+
+Install Satelllite Server
+```
+# satellite-installer --scenario satellite \
+--foreman-initial-organization "default" \
+--foreman-initial-location "ontario" \
+--foreman-initial-admin-username rajat \
+--foreman-initial-admin-password redhat
+```
