@@ -130,7 +130,7 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 
 ## Installing Red Hat Satellite Server
 
-#### Prerequisites
+### Prerequisites
 
 Create a Virtual Machine and Install latest version of Red Hat Enterprise Linux 8 on it.
 
@@ -138,6 +138,8 @@ I have created a VM with the following configuration:
 - vCPUs - 4
 - RAM - 20 GB
 - Storage - 500 GB
+
+### Steps to Install
 
 Set hostname
 ```
