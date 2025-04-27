@@ -1,6 +1,6 @@
 # Red Hat Satellite 6.15 Installation in a Connected Network Environment
 
-## Preparing your environment for Installation of Red Hat Satellite 6.15
+## Preparing your environment for Installation
 
 ### System Requirements for base OS
 
@@ -128,7 +128,7 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 | 9090             | TCP                | HTTPS           | Client                  | OpenSCAP                           | Configure Client (if the OpenSCAP plugin is installed)                 |
 | 9090             | TCP                | HTTPS           | Discovered Node         | Discovery                          | Host discovery and provisioning (if the discovery plugin is installed) |
 
-## Installing Red Hat Satellite Server
+## Installing Red Hat Satellite Server 6.15
 
 ### Prerequisites
 
@@ -141,31 +141,42 @@ I have created a VM with the following configuration:
 
 ### Steps to Install
 
+Become root user
+```
+[ragrawal@localhost ~]$ su -
+Password: <password>
+```
+
 Set hostname
 ```
-# hostnamectl set-hostname satellite.example.com
+[root@localhost ~]# hostnamectl set-hostname satellite.example.com
 ```
 
 Configure SELinux in Enforcing mode
 ```
-# entenforce 1
+[root@satellite ~]# entenforce 1
 ```
 
-Check the status of System Clock Synchronization
+Verify Enforcing mode
 ```
-# chronyc sources -v
+[root@satellite ~]# getenforce
+```
+
+Verify System Clock Synchronization
+```
+[root@satellite ~]# chronyc sources -v
 ```
 
 Open the ports for clients on Satellite Server
 ```
-# firewall-cmd \
+[root@satellite ~]# firewall-cmd \
 --add-port="8000/tcp" \
 --add-port="9090/tcp"
 ```
 
 Allow access to services on Satellite Server
 ```
-# firewall-cmd \
+[root@satellite ~]# firewall-cmd \
 --add-service=dns \
 --add-service=dhcp \
 --add-service=tftp \
@@ -176,35 +187,33 @@ Allow access to services on Satellite Server
 
 Make the changes persistent
 ```
-# firewall-cmd --runtime-to-permanent
+[root@satellite ~]# firewall-cmd --runtime-to-permanent
 ```
 
 Verify firewall configuration
 ```
-# firewall-cmd --list-all
+[root@satellite ~]# firewall-cmd --list-all
 ```
 
 Verify DNS resolution
 ```
-# ping -c1 localhost
-# ping -c1 `hostname -f`
+[root@satellite ~]# ping -c1 localhost
+[root@satellite ~]# ping -c1 `hostname -f`
 ```
 
 Registering the host to Red Hat Subscription Management
 ```
-# subscription-manager register
-Username: <user_name>
-Password: <password> 
+[root@satellite ~]# subscription-manager register
 ```
 
 Disable all repos
 ```
-# subscription-manager repos --disable "*"
+[root@satellite ~]# subscription-manager repos --disable "*"
 ```
 
 Enable the required repos
 ```
-# subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
+[root@satellite ~]# subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
 --enable=rhel-8-for-x86_64-appstream-rpms \
 --enable=satellite-6.15-for-rhel-8-x86_64-rpms \
 --enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
@@ -212,39 +221,64 @@ Enable the required repos
 
 Verify that repositories are enabled.
 ```
-# sudo subscription-manager repos --list-enabled
+[root@satellite ~]# subscription-manager repos --list-enabled
 ```
 
 Enable the DNF module for satellite
 ```
-# dnf module enable satellite:el8
+[root@satellite ~]# dnf module enable satellite:el8 -y
 ```
 
-Installing fapolicyd on Satellite Server
+Install, Enable and Verify fapolicyd on Satellite Server (Optional)
 ```
-# dnf install fapolicyd
-# systemctl enable --now fapolicyd
-# systemctl status fapolicyd
+[root@satellite ~]# dnf install fapolicyd -y
+[root@satellite ~]# systemctl enable --now fapolicyd
+[root@satellite ~]# systemctl status fapolicyd
 ```
 
 Update all packages
 ```
-# dnf upgrade
+[root@satellite ~]# dnf upgrade -y
+```
+
+Reboot System (If required)
+```
+[root@satellite ~]# reboot
 ```
 
 Install Satellite Server packages
 ```
-# dnf install satellite
+[root@satellite ~]# dnf install satellite -y
 ```
 
 Install Satelllite Server
 ```
-# satellite-installer --scenario satellite \
---foreman-initial-organization "default" \
+[root@satellite ~]# satellite-installer --scenario satellite \
+--foreman-initial-organization "redhat" \
 --foreman-initial-location "ontario" \
---foreman-initial-admin-username rajat \
+--foreman-initial-admin-username admin \
 --foreman-initial-admin-password redhat
 ```
+
+Once the installation is completed, similar output will be shown on the screen
+
+![installation_successful](/images/1-success.png)  
+
+### Login to Red Hat Satellite Server Dashboard
+
+Open a browser, enter the satellite url - https://satellite.example.com
+
+![browser](/images/2-browser.png)
+
+Enter Credentials and click Login
+
+![credentials](/images/3-credentials.png)
+
+- Username: admin
+- Password: redhat 
+
+You can now see the dashboard of Red Hat Satellite Server 6.15
+![Dashboard](/images/4-dashboard.png)
 
 ## References
 [Installing Satellite Server in a connected network environment](https://docs.redhat.com/en/documentation/red_hat_satellite/6.15/html-single/installing_satellite_server_in_a_connected_network_environment/index#providing-feedback-on-red-hat-documentation_satellite)
