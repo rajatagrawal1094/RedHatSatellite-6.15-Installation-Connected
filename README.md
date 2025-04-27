@@ -98,8 +98,6 @@ The runtime size was measured with Red Hat Enterprise Linux 6, 7, and 8 reposito
 > [!WARNING]
 > Red Hat advises against using an existing system because the Satellite installer will affect the configuration of several components.
 
-> Red Hat does not support using the system for anything other than running Satellite Server.
-
 ### Supported Browsers
 
 Satellite supports recent versions of Firefox and Google Chrome browsers.
@@ -108,4 +106,22 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 
 ### Ports and Firewall Requirements
 
-
+| Destination Port | Protocol           | Service         | Source                  | Required For                       | Description                                                            |
+| :-------------:  | :-------------:    | :-------------: | :---------------------: | :--------------------------------: | :--------------------------------------------------------------------: | 
+| 53               | TCP and UDP        | DNS             | DNS Servers and clients | Name resolution                    | DNS (optional)                                                         |
+| 67               | UDP                | DHCP            | Client                  | Dynamic IP                         | DHCP (optional)                                                        |
+| 69               | UDP                | TFTP            | Client                  | TFTP Server (optional)             |                                                                        |
+| 443              | TCP                | HTTPS           | Capsule                 | Red Hat Satellite API              | Communication from Capsule                                             |
+| 443, 80          | TCP                | HTTPS, HTTP     | Client                  | Global Registration                | Registering hosts to Satellite                                         |
+| 443              | TCP                | HTTPS           | Red Hat Satellite       | Content Mirroring                  | Management                                                             |
+| 443              | TCP                | HTTPS           | Red Hat Satellite       | Capsule API                        | Smart Proxy functionality                                              |
+| 443, 80          | TCP                | HTTPS, HTTP     | Capsule                 | Content Retrieval                  | Content                                                                |
+| 443, 80          | TCP                | HTTPS, HTTP     | Client                  | Content Retrieval                  | Content                                                                |
+| 1883             | TCP                | MQTT            | Client                  | Pull based REX (optional)          | Content hosts for REX job notification (optional)                      |
+| 5910 – 5930      | TCP                | HTTPS           | Browsers                | Compute Resource’s virtual console |                                                                        |
+| 8000             | TCP                | HTTP            | Client                  | Provisioning templates             | Template retrieval for client installers, iPXE or UEFI HTTP Boot       |
+| 8000             | TCP                | HTTPS           | Client                  | PXE Boot                           | Installation                                                           |
+| 8140             | TCP                | HTTPS           | Client                  | Puppet agent                       | Client updates (optional)                                              |
+| 9090             | TCP                | HTTPS           | Red Hat Satellite       | Capsule API                        | Smart Proxy functionality                                              |
+| 9090             | TCP                | HTTPS           | Client                  | OpenSCAP                           | Configure Client (if the OpenSCAP plugin is installed)                 |
+| 9090             | TCP                | HTTPS           | Discovered Node         | Discovery                          | Host discovery and provisioning (if the discovery plugin is installed) |
