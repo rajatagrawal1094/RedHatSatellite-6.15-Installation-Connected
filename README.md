@@ -128,7 +128,7 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 | 9090             | TCP                | HTTPS           | Client                  | OpenSCAP                           | Configure Client (if the OpenSCAP plugin is installed)                 |
 | 9090             | TCP                | HTTPS           | Discovered Node         | Discovery                          | Host discovery and provisioning (if the discovery plugin is installed) |
 
-### Steps to Install
+## Installing Red Hat Satellite Server
 
 #### Prerequisites
 
