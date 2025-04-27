@@ -245,3 +245,7 @@ Install Satelllite Server
 --foreman-initial-admin-username rajat \
 --foreman-initial-admin-password redhat
 ```
+
+## References
+[Installing Satellite Server in a connected network environment]
+(https://docs.redhat.com/en/documentation/red_hat_satellite/6.15/html-single/installing_satellite_server_in_a_connected_network_environment/index#providing-feedback-on-red-hat-documentation_satellite)
