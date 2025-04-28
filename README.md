@@ -174,7 +174,7 @@ Configure SELinux in Enforcing mode
 [root@satellite ~]# entenforce 1
 ```
 
-Verify Enforcing mode
+Verify SELinux mode
 ```
 [root@satellite ~]# getenforce
 ```
@@ -212,7 +212,6 @@ Verify firewall configuration
 [root@satellite ~]# firewall-cmd --list-all
 ```
 
-Below is the expected output of the above command
 ![firewall_output](/images/1-firewall_output.png)
 
 Verify DNS resolution
@@ -221,7 +220,6 @@ Verify DNS resolution
 [root@satellite ~]# ping -c1 `hostname -f`
 ```
 
-Below is the expected output of the above command
 ![ping_output](/images/2-ping_output.png)
 
 Register the host to Red Hat Subscription Management
@@ -229,7 +227,6 @@ Register the host to Red Hat Subscription Management
 [root@satellite ~]# subscription-manager register
 ```
 
-Below is the expected output of the above command
 ![subscription_register](/images/3-subscription_register.png)
 
 Disable all repos
@@ -245,7 +242,6 @@ Enable the required repos
 --enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
 ```
 
-Below is the expected output of the above command
 ![enabling_repos](/images/4-enabling_repos.png)
 
 Verify that repositories are enabled.
@@ -253,7 +249,6 @@ Verify that repositories are enabled.
 [root@satellite ~]# subscription-manager repos --list-enabled
 ```
 
-Below is the expected output of the above command
 ![enabled_repos](/images/5-enabled_repos.png)
 
 Enable the DNF module for satellite
