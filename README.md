@@ -29,21 +29,21 @@
 
 #### SELinux Mode
 
-- SELinux must be enabled, either in enforcing or permissive mode.
+SELinux must be enabled, either in enforcing or permissive mode.
 
 > [!WARNING] 
 > Installation with disabled SELinux is not supported.
 
 #### Synchronized System Clock
 
-- The system clock on the base operating system where you are installing your Satellite Server must be synchronized across the network. 
+The system clock on the base operating system where you are installing your Satellite Server must be synchronized across the network. 
 
 > [!WARNING]
 > If the system clock is not synchronized, SSL certificate verification might fail.
 
 #### FIPS Mode
 
-- You can install Satellite on a Red Hat Enterprise Linux system that is operating in FIPS mode.
+You can install Satellite on a Red Hat Enterprise Linux system that is operating in FIPS mode.
 
 > [!WARNING]
 > You cannot enable FIPS mode after the installation of Satellite.
@@ -76,36 +76,37 @@ The runtime size was measured with Red Hat Enterprise Linux 6, 7, and 8 reposito
 
 ### File System Guidelines
 
-- Do not use the GFS2 file system as the input-output latency is too high.
+Do not use the GFS2 file system as the input-output latency is too high.
 
 ### Log file storage
 
-- Log files are written to /var/log/messages/, /var/log/httpd/, and /var/lib/foreman-proxy/openscap/content/. You can manage the size of these files using logrotate.
+Log files are written to /var/log/messages/, /var/log/httpd/, and /var/lib/foreman-proxy/openscap/content/. You can manage the size of these files using logrotate.
 
 ### Duplicated packages
 
-- Packages that are duplicated in different repositories are only stored once on the disk. Additional repositories containing duplicate packages require less additional storage.
+Packages that are duplicated in different repositories are only stored once on the disk. Additional repositories containing duplicate packages require less additional storage.
 
 ### Symbolic links
 
-- You cannot use symbolic links for /var/lib/pulp/.
+You cannot use symbolic links for /var/lib/pulp/.
 
 ### Supported Operating Systems
 
-- Red Hat Enterprise Linux 8 - x86_64 only.
+Red Hat Enterprise Linux 8 - x86_64 only.
 
 > [!NOTE]
 > Previous versions of Red Hat Enterprise Linux including EUS or z-stream are not supported.
 
 > [!WARNING]
-> Red Hat advises against using an existing system because the Satellite installer will affect the configuration of several components.  
-> Red Hat does not support using the system for anything other than running Satellite Server.
+> - Red Hat advises against using an existing system because the Satellite installer will affect the configuration of several components.  
+> - Red Hat does not support using the system for anything other than running Satellite Server.
 
 ### Supported Browsers
 
 Satellite supports recent versions of Firefox and Google Chrome browsers.
 
-The Satellite web UI and command-line interface support English, Simplified Chinese, Japanese, French.
+> [!NOTE]
+> The Satellite web UI and command-line interface support English, Simplified Chinese, Japanese, French.
 
 ### Ports and Firewall Requirements
 
@@ -133,9 +134,9 @@ The Satellite web UI and command-line interface support English, Simplified Chin
 
 ### Prerequisites
 
-Create a Virtual Machine and Install latest version of Red Hat Enterprise Linux 8 on it.
+A Virtual Machine with the latest version of Red Hat Enterprise Linux 8 on it.
 
-I have created a VM with the following configuration:
+I have created a Virtual Machine with the following configuration:
 - vCPUs - 4
 - RAM - 20 GB
 - Storage - 500 GB
@@ -145,12 +146,19 @@ I have created a VM with the following configuration:
 Become root user
 ```
 [ragrawal@localhost ~]$ su -
-Password: <password>
 ```
 
 Set hostname
 ```
 [root@localhost ~]# hostnamectl set-hostname satellite.example.com
+```
+
+> [!WARNING]
+> Name resolution is critical to the operation of Satellite. If Satellite cannot properly resolve its fully qualified domain name, tasks such as content management, subscription management, and provisioning will fail.
+
+Verify hostname
+```
+[root@satellite ~]# hostname
 ```
 
 Configure SELinux in Enforcing mode
