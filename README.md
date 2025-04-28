@@ -146,20 +146,28 @@ I have created a Virtual Machine with the following configuration:
 Become root user
 ```
 [ragrawal@localhost ~]$ su -
+Password: <enter_password>
 ```
 
-Set hostname
+Set hostname and reboot 
 ```
 [root@localhost ~]# hostnamectl set-hostname satellite.example.com
+[root@localhost ~]# reboot
 ```
 
-> [!WARNING]
-> Name resolution is critical to the operation of Satellite. If Satellite cannot properly resolve its fully qualified domain name, tasks such as content management, subscription management, and provisioning will fail.
+Become root user
+```
+[ragrawal@localhost ~]$ su -
+Password: <enter_password>
+```
 
 Verify hostname
 ```
 [root@satellite ~]# hostname
 ```
+
+> [!WARNING]
+> Name resolution is critical to the operation of Satellite. If Satellite cannot properly resolve its fully qualified domain name, tasks such as content management, subscription management, and provisioning will fail.
 
 Configure SELinux in Enforcing mode
 ```
@@ -204,16 +212,25 @@ Verify firewall configuration
 [root@satellite ~]# firewall-cmd --list-all
 ```
 
+Below is the expected output of the above command
+![firewall_output](/images/1-firewall_output.png)
+
 Verify DNS resolution
 ```
 [root@satellite ~]# ping -c1 localhost
 [root@satellite ~]# ping -c1 `hostname -f`
 ```
 
+Below is the expected output of the above command
+![ping_output](/images/2-ping_output.png)
+
 Register the host to Red Hat Subscription Management
 ```
 [root@satellite ~]# subscription-manager register
 ```
+
+Below is the expected output of the above command
+![subscription_register](/images/3-subscription_register.png)
 
 Disable all repos
 ```
@@ -228,10 +245,16 @@ Enable the required repos
 --enable=satellite-maintenance-6.15-for-rhel-8-x86_64-rpms
 ```
 
+Below is the expected output of the above command
+![enabling_repos](/images/4-enabling_repos.png)
+
 Verify that repositories are enabled.
 ```
 [root@satellite ~]# subscription-manager repos --list-enabled
 ```
+
+Below is the expected output of the above command
+![enabled_repos](/images/5-enabled_repos.png)
 
 Enable the DNF module for satellite
 ```
@@ -261,6 +284,20 @@ Install Satellite Server packages
 ```
 
 Install Satelllite Server
+
+```
+# satellite-installer --scenario satellite \
+--foreman-initial-organization "My_Organization" \
+--foreman-initial-location "My_Location" \
+--foreman-initial-admin-username admin_user_name \
+--foreman-initial-admin-password admin_password
+```
+
+- Organization: redhat
+- Location: redhat
+- Admin Username: admin
+- Admin Password: redhat
+
 ```
 [root@satellite ~]# satellite-installer --scenario satellite \
 --foreman-initial-organization "redhat" \
@@ -271,24 +308,24 @@ Install Satelllite Server
 
 Once the installation is completed, similar output will be shown on the screen
 
-![installation_successful](/images/1-success.png)  
+![installation_output](/images/6-installation_output.png)  
 
 ### Login to Red Hat Satellite Server Dashboard
 
 Open a browser, enter the Red Hat Satellite Server URL - https://satellite.example.com
 
-![browser](/images/2-browser.png)
+![browser](/images/7-browser.png)
 
 Enter Credentials and click Log In button
 
 - Username: admin
 - Password: redhat 
 
-![credentials](/images/3-credentials.png)
+![credentials](/images/8-credentials.png)
 
 You can now see the dashboard of Red Hat Satellite Server 6.15
 
-![Dashboard](/images/4-dashboard.png)
+![Dashboard](/images/9-dashboard.png)
 
 ## References
 [Installing Satellite Server in a connected network environment](https://docs.redhat.com/en/documentation/red_hat_satellite/6.15/html-single/installing_satellite_server_in_a_connected_network_environment/index#providing-feedback-on-red-hat-documentation_satellite)
