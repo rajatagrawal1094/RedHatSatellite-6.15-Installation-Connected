@@ -288,10 +288,10 @@ Install Satelllite Server
 --foreman-initial-admin-password admin_password
 ```
 
-- Organization: redhat
-- Location: redhat
-- Admin Username: admin
-- Admin Password: redhat
+- **Organization**: redhat
+- **Location**: redhat
+- **Admin Username**: admin
+- **Admin Password**: redhat
 
 ```
 [root@satellite ~]# satellite-installer --scenario satellite \
