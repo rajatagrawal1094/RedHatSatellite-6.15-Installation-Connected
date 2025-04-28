@@ -279,12 +279,12 @@ Open a browser, enter the satellite url - https://satellite.example.com
 
 ![browser](/images/2-browser.png)
 
-Enter Credentials and click Login
-
-![credentials](/images/3-credentials.png)
+Enter Credentials and click Log In button
 
 - Username: admin
 - Password: redhat 
+
+![credentials](/images/3-credentials.png)
 
 You can now see the dashboard of Red Hat Satellite Server 6.15
 
