@@ -275,7 +275,7 @@ Once the installation is completed, similar output will be shown on the screen
 
 ### Login to Red Hat Satellite Server Dashboard
 
-Open a browser, enter the satellite url - https://satellite.example.com
+Open a browser, enter the Red Hat Satellite Server URL - https://satellite.example.com
 
 ![browser](/images/2-browser.png)
 
