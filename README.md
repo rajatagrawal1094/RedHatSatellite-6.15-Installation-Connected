@@ -325,3 +325,4 @@ You can now see the dashboard of Red Hat Satellite Server 6.15
 
 ## References
 [Installing Satellite Server in a connected network environment](https://docs.redhat.com/en/documentation/red_hat_satellite/6.15/html-single/installing_satellite_server_in_a_connected_network_environment/index#providing-feedback-on-red-hat-documentation_satellite)
+[Red Hat Satellite 6.x Release info](https://access.redhat.com/articles/1365633#sat6)
