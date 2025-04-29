@@ -137,9 +137,10 @@ Satellite supports recent versions of Firefox and Google Chrome browsers.
 A Virtual Machine with the latest version of Red Hat Enterprise Linux 8 on it.
 
 I have created a Virtual Machine with the following configuration:
-- vCPUs - 4
-- RAM - 20 GB
-- Storage - 500 GB
+- **vCPUs** - 4
+- **RAM** - 20 GB
+- **Storage** - 500 GB
+- **Operating System** - Red Hat Enterprise Linux 8.10
 
 ### Steps to Install
 
@@ -313,8 +314,8 @@ Open a browser, enter the Red Hat Satellite Server URL - https://satellite.examp
 
 Enter Credentials and click Log In button
 
-- Username: admin
-- Password: redhat 
+- **Username**: admin
+- **Password**: redhat 
 
 ![credentials](/images/8-credentials.png)
 
