@@ -1,6 +1,6 @@
 # Red Hat Satellite 6.15 Installation in a Connected Network Environment
 
-### <ins>[Red Hat Satellite Learning Series Main Menu]</ins>(https://github.com/rajatagrawal1094/RedHatSatellite)
+<ins>[Red Hat Satellite Learning Series Main Menu](https://github.com/rajatagrawal1094/RedHatSatellite)</ins>
 
 ## Preparing your environment for Installation
 
