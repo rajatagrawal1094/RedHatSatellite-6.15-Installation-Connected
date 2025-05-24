@@ -149,7 +149,7 @@ Become root user
 su -
 ```
 
-```output
+```text
 [ragrawal@localhost ~]$ su -
 Password: <enter_password>
 ```
