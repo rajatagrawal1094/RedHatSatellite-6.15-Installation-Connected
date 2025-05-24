@@ -324,6 +324,53 @@ You can now see the dashboard of Red Hat Satellite Server 6.15
 
 ![Dashboard](/images/9-dashboard.png)
 
+Run the below command to check the Satellite services and their statuses.
+```console
+[root@satellite ~]# satellite-maintain service list
+```
+
+![service_list](/images/10-service_list.png)
+
+Run the below command to check the detailed status information of each Satellite services
+```console
+[root@satellite ~]# satellite-maintain service status
+```
+
+Run the below command to perform a system health check
+```console
+[root@satellite ~]# satellite-maintain health check
+```
+
+![health_check](/images/11-health-check.png)
+
+Run the below command to list all registered Capsules, including the internal one
+```console
+[root@satellite ~]# hammer capsule list
+```
+
+![capsule-list](/images/12-capsule-list.png)
+
+Run the below command to see detailed Capsule service and sync status
+```console
+[root@satellite ~]# hammer capsule info --id 1
+```
+
+![capsule-status](/images/13-capsule-status.png)
+
+Run the below command to see the default or created organizations
+```console
+[root@satellite ~]# hammer organization list
+```
+
+![organization-list](/images/14-organization-list.png)
+
+Run the below command to see the default or created locations 
+```console
+[root@satellite ~]# hammer location list
+```
+
+![location-list](/images/15-location-list.png)
+
 ## References
 [Installing Satellite Server in a connected network environment](https://docs.redhat.com/en/documentation/red_hat_satellite/6.15/html-single/installing_satellite_server_in_a_connected_network_environment/index#providing-feedback-on-red-hat-documentation_satellite)  
 [Red Hat Satellite 6.x Release info](https://access.redhat.com/articles/1365633#sat6)  
