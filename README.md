@@ -158,13 +158,13 @@ Set hostname and reboot
 ```
 
 Become root user
-```
+```console
 [ragrawal@localhost ~]$ su -
 Password: <enter_password>
 ```
 
 Verify hostname
-```
+```console
 [root@satellite ~]# hostname
 ```
 
@@ -172,29 +172,29 @@ Verify hostname
 > Name resolution is critical to the operation of Satellite. If Satellite cannot properly resolve its fully qualified domain name, tasks such as content management, subscription management, and provisioning will fail.
 
 Configure SELinux in Enforcing mode
-```
+```console
 [root@satellite ~]# entenforce 1
 ```
 
 Verify SELinux mode
-```
+```console
 [root@satellite ~]# getenforce
 ```
 
 Verify System Clock Synchronization
-```
+```console
 [root@satellite ~]# chronyc sources -v
 ```
 
 Open the firewall ports for clients on Satellite Server
-```
+```console
 [root@satellite ~]# firewall-cmd \
 --add-port="8000/tcp" \
 --add-port="9090/tcp"
 ```
 
 Allow access to services on Satellite Server
-```
+```console
 [root@satellite ~]# firewall-cmd \
 --add-service=dns \
 --add-service=dhcp \
@@ -205,19 +205,19 @@ Allow access to services on Satellite Server
 ```
 
 Make the changes persistent in firewall
-```
+```console
 [root@satellite ~]# firewall-cmd --runtime-to-permanent
 ```
 
 Verify firewall configuration
-```
+```console
 [root@satellite ~]# firewall-cmd --list-all
 ```
 
 ![firewall_output](/images/1-firewall_output.png)
 
 Verify DNS resolution
-```
+```console
 [root@satellite ~]# ping -c1 localhost
 [root@satellite ~]# ping -c1 `hostname -f`
 ```
@@ -225,19 +225,19 @@ Verify DNS resolution
 ![ping_output](/images/2-ping_output.png)
 
 Register the host to Red Hat Subscription Management
-```
+```console
 [root@satellite ~]# subscription-manager register
 ```
 
 ![subscription_register](/images/3-subscription_register.png)
 
 Disable all repos
-```
+```console
 [root@satellite ~]# subscription-manager repos --disable "*"
 ```
 
 Enable the required repos
-```
+```console
 [root@satellite ~]# subscription-manager repos --enable=rhel-8-for-x86_64-baseos-rpms \
 --enable=rhel-8-for-x86_64-appstream-rpms \
 --enable=satellite-6.15-for-rhel-8-x86_64-rpms \
@@ -247,42 +247,42 @@ Enable the required repos
 ![enabling_repos](/images/4-enabling_repos.png)
 
 Verify that repositories are enabled.
-```
+```console
 [root@satellite ~]# subscription-manager repos --list-enabled
 ```
 
 ![enabled_repos](/images/5-enabled_repos.png)
 
 Enable the DNF module for satellite
-```
+```console
 [root@satellite ~]# dnf module enable satellite:el8 -y
 ```
 
 Install, Enable and Verify fapolicyd on Satellite Server (Optional)
-```
+```console
 [root@satellite ~]# dnf install fapolicyd -y
 [root@satellite ~]# systemctl enable --now fapolicyd
 [root@satellite ~]# systemctl status fapolicyd
 ```
 
 Update all packages
-```
+```console
 [root@satellite ~]# dnf upgrade -y
 ```
 
 Reboot System (If required)
-```
+```console
 [root@satellite ~]# reboot
 ```
 
 Install Satellite Server packages
-```
+```console
 [root@satellite ~]# dnf install satellite -y
 ```
 
 Install Satelllite Server
 
-```
+```console
 # satellite-installer --scenario satellite \
 --foreman-initial-organization "My_Organization" \
 --foreman-initial-location "My_Location" \
@@ -295,7 +295,7 @@ Install Satelllite Server
 - **Admin Username**: admin
 - **Admin Password**: redhat
 
-```
+```console
 [root@satellite ~]# satellite-installer --scenario satellite \
 --foreman-initial-organization "redhat" \
 --foreman-initial-location "ontario" \
