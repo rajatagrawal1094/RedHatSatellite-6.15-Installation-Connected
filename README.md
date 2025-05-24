@@ -145,7 +145,7 @@ I have created a Virtual Machine with the following configuration:
 ### Steps to Install
 
 Become root user
-```console
+```shell
 su -
 ```
 
