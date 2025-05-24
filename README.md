@@ -145,7 +145,11 @@ I have created a Virtual Machine with the following configuration:
 ### Steps to Install
 
 Become root user
+```bash
+su -
 ```
+
+```output
 [ragrawal@localhost ~]$ su -
 Password: <enter_password>
 ```
