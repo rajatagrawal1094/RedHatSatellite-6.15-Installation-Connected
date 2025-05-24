@@ -145,17 +145,14 @@ I have created a Virtual Machine with the following configuration:
 ### Steps to Install
 
 Become root user
-```shell
-su -
-```
 
-```plaintext
+```console
 [ragrawal@localhost ~]$ su -
 Password: <enter_password>
 ```
 
 Set hostname and reboot 
-```
+```console
 [root@localhost ~]# hostnamectl set-hostname satellite.example.com
 [root@localhost ~]# reboot
 ```
